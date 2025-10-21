@@ -1,9 +1,49 @@
-import example.pepita
+import elementos.*
+import plagas.*
 
-describe "group of tests for pepita" {
+describe "Test de los elementos" {
+  const hogarMala = new Hogar(nivelMugre=100,nivelConfort=50)
+  const hogarbuena = new Hogar(nivelMugre=50,nivelConfort=100)
+  const huertaBuena = new Huerta(capacidad = 150)
+  const huertaMala = new Huerta(capacidad = 70)
+  const mascotaBuena = new Mascota(nivelSalud = 260)
+  const mascotaMala = new Mascota(nivelSalud = 230)
+  const barrio1 = new Barrio()
+  const barrio2 = new Barrio()
+  const plagaCuca1 = new PlagaCucaracha(poblacion =80,pesoPromedio = 8)
+  const plagaCuca2 = new PlagaCucaracha(poblacion =8,pesoPromedio = 1)
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+  method initialize(){
+    barrio1.agregarElemento(hogarMala)
+    barrio1.agregarElemento(hogarbuena)
+    barrio1.agregarElemento(mascotaBuena)
+    barrio2.agregarElemento(hogarbuena)
+    barrio2.agregarElemento(huertaMala)
+    barrio2.agregarElemento(mascotaMala)
+
+  }
+  test "El barrio 1 es copado" {
+    assert.that(barrio1.esCopado())
+  }
+  test "El barrio 2 no es copado" {
+    assert.notThat(barrio2.esCopado())
+  }
+  test "La plaga de cucarachas 1  transmite enfermedades" {
+    assert.notThat(plagaCuca1.transmiteEnfermedad())
+  }
+  test "Nivel de danio de la plaga 1" {
+    assert.equals(40, plagaCuca1.nivelDaño())
   }
 
+  test "La plaga de cucarachas 2 no transmite enfermedades" {
+    assert.notThat(plagaCuca2.transmiteEnfermedad())
+  }
+  test "Barrio 1 deja de serlo cuando  el hogar es atacado por las cucarachas" {
+    hogarbuena.esAtacadoPorPlaga(plagaCuca1)
+    assert.notThat(barrio1.esCopado())
+  }
+  test "El peso promedio de las cucarachas luego de atacar" {
+    hogarbuena.esAtacadoPorPlaga(plagaCuca1)
+    assert.equals(plagaCuca1.pesoPromedio(),10)
+  }
 }

@@ -12,7 +12,7 @@ class Plaga {
 
 class PlagaCucaracha inherits Plaga{
 
-    var pesoPromedio 
+    var property pesoPromedio 
 
     method nivelDaño() = poblacion/2
     
@@ -46,7 +46,3 @@ class PlagaMosquito inherits Plaga{
 
     override method transmiteEnfermedad() = super() and poblacion % 3 == 0
 }
-//TERMINAR BARRIO
-class Barrio{
-
-} 

@@ -17,6 +17,8 @@ class Huerta{
 
     var capacidad
 
+    
+
     method esBueno() = capacidad > nivelMinimo.valor()
 
     method esAtacadoPorPlaga(unaPlaga) {
@@ -26,7 +28,7 @@ class Huerta{
 }
 
 object nivelMinimo {
-  var property valor 
+  var property valor = 100
 }
 
 class Mascota{
@@ -41,5 +43,23 @@ class Mascota{
     }
 }
 
+
+class Barrio{
+  
+  const elementos = []
+
+  method agregarElemento(unElemento) {
+    elementos.add(unElemento)
+  }
+
+  method elementosBuenos() = elementos.filter({e =>e.esBueno()})
+
+  method elementosMalos() = elementos.filter({e =>not e.esBueno()})
+
+  method cantidadBuenos() = self.elementosBuenos().size()
+  method cantidadMalos() = self.elementosMalos().size()
+  method esCopado() = self.cantidadBuenos()>self.cantidadMalos()
+
+} 
 
 
